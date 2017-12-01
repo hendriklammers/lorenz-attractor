@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "build": "yarn && npm run lint && webpack",
-    "lint": "eslint src --ext .js",
+    "lint": "tslint src/**/*.ts",
     "start": "npm run watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack-dev-server"
@@ -13,11 +13,6 @@
   "author": "Hendrik Lammers (www.hendriklammers.com)",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.32",
-    "@babel/polyfill": "^7.0.0-beta.32",
-    "@babel/preset-env": "^7.0.0-beta.32",
-    "@babel/preset-stage-0": "^7.0.0-beta.32",
-    "babel-loader": "8.0.0-beta.0",
     "css-loader": "^0.28.7",
     "eslint": "^4.12.1",
     "style-loader": "^0.19.0",
