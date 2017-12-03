@@ -20,7 +20,11 @@ let controls: THREE.OrbitControls
 
 const createParticles = (): THREE.Points => {
   const geometry = new THREE.Geometry()
-  const material = new THREE.PointsMaterial({ size: 1, color: colors.green })
+  const material = new THREE.PointsMaterial({
+    size: 1,
+    color: colors.green,
+    sizeAttenuation: false,
+  })
   const particles = new THREE.Points(geometry, material)
 
   let x = 0.01
@@ -30,10 +34,10 @@ const createParticles = (): THREE.Points => {
   let b = 28
   let c = 8 / 3
 
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 0; i < 10000; i++) {
     const vertex = new THREE.Vector3()
 
-    const dt = 0.01
+    const dt = 0.005
     const dx = a * (y - x) * dt
     const dy = (x * (b - z) - y) * dt
     const dz = (x * y - c * z) * dt
@@ -53,7 +57,7 @@ const createParticles = (): THREE.Points => {
 const main = () => {
   camera = new THREE.PerspectiveCamera(75, width / height, 1, 1000)
   controls = new THREE.OrbitControls(camera)
-  camera.position.z = 200
+  camera.position.z = 100
   controls.update()
 
   scene = new THREE.Scene()
@@ -65,12 +69,6 @@ const main = () => {
   renderer.setPixelRatio(window.devicePixelRatio)
 
   container.appendChild(renderer.domElement)
-
-  const pointLight = new THREE.PointLight(0xffffff)
-  pointLight.position.x = 10
-  pointLight.position.y = 50
-  pointLight.position.z = 130
-  scene.add(pointLight)
 
   const particles = createParticles()
   scene.add(particles)
