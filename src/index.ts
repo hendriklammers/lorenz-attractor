@@ -27,27 +27,40 @@ let camera: PerspectiveCamera
 let scene: Scene
 let renderer: WebGLRenderer
 
-const createParticles = () => {
+const createParticles = (): Points => {
   const geometry = new Geometry()
   const material = new PointsMaterial({ size: 3, color: colors.green })
   const particles = new Points(geometry, material)
-  scene.add(particles)
 
-  const radius = 500
-  for (let i = 0; i < 10000; i++) {
+  let x = 0.05
+  let y = 0
+  let z = 0
+  let a = 10
+  let b = 28
+  let c = 8 / 3
+
+  for (let i = 0; i < 1000; i++) {
     const vertex = new Vector3()
-    const theta = Math3.randFloatSpread(360)
-    const phi = Math3.randFloatSpread(360)
 
-    vertex.x = radius * Math.sin(theta) * Math.cos(phi)
-    vertex.y = radius * Math.sin(theta) * Math.sin(phi)
-    vertex.z = radius * Math.cos(theta)
+    const dt = 0.01
+    const dx = a * (y - x) * dt
+    const dy = (x * (b - z) - y) * dt
+    const dz = (x * y - c * z) * dt
+    x = x + dx
+    y = y + dy
+    z = z + dz
+
+    vertex.x = x
+    vertex.y = y
+    vertex.z = z
     geometry.vertices.push(vertex)
   }
+
+  return particles
 }
 
 const main = () => {
-  camera = new PerspectiveCamera(75, width / height, 0.1, 1000)
+  camera = new PerspectiveCamera(75, width / height, 1, 1000)
   camera.position.z = 1000
 
   scene = new Scene()
@@ -66,7 +79,8 @@ const main = () => {
   pointLight.position.z = 130
   scene.add(pointLight)
 
-  createParticles()
+  const particles = createParticles()
+  scene.add(particles)
   render()
 }
 
