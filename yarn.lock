@@ -1267,6 +1267,13 @@ expand-range@^1.8.1:
   dependencies:
     fill-range "^2.1.0"
 
+exports-loader@^0.6.4:
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/exports-loader/-/exports-loader-0.6.4.tgz#d70fc6121975b35fc12830cf52754be2740fc886"
+  dependencies:
+    loader-utils "^1.0.2"
+    source-map "0.5.x"
+
 express@^4.16.2:
   version "4.16.2"
   resolved "https://registry.yarnpkg.com/express/-/express-4.16.2.tgz#e35c6dfe2d64b7dca0a5cd4f21781be3299e076c"
@@ -1749,6 +1756,13 @@ import-local@^0.1.1:
   dependencies:
     pkg-dir "^2.0.0"
     resolve-cwd "^2.0.0"
+
+imports-loader@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/imports-loader/-/imports-loader-0.7.1.tgz#f204b5f34702a32c1db7d48d89d5e867a0441253"
+  dependencies:
+    loader-utils "^1.0.2"
+    source-map "^0.5.6"
 
 imurmurhash@^0.1.4:
   version "0.1.4"
@@ -3479,7 +3493,7 @@ source-list-map@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-2.0.0.tgz#aaa47403f7b245a92fbc97ea08f250d6087ed085"
 
-source-map@^0.5.3, source-map@^0.5.6, source-map@~0.5.1:
+source-map@0.5.x, source-map@^0.5.3, source-map@^0.5.6, source-map@~0.5.1:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
 

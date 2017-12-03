@@ -1,16 +1,6 @@
-import "./styles.css"
-import {
-  Scene,
-  PerspectiveCamera,
-  WebGLRenderer,
-  Geometry,
-  Points,
-  PointsMaterial,
-  PointLight,
-  FogExp2,
-  Vector3,
-  Math as Math3,
-} from "three"
+import './styles.css'
+import * as THREE from 'three'
+import 'imports-loader?THREE=three!exports-loader?THREE.OrbitControls!../node_modules/three/examples/js/controls/OrbitControls'
 
 const colors = {
   green: 0xd2fb78,
@@ -19,20 +9,21 @@ const colors = {
   cyan: 0x49cdf6,
   grey: 0x49496a,
 }
-const container = document.querySelector("#container")
+const container = document.querySelector('#container')
 const width = window.innerWidth
 const height = window.innerHeight
 
-let camera: PerspectiveCamera
-let scene: Scene
-let renderer: WebGLRenderer
+let camera: THREE.PerspectiveCamera
+let scene: THREE.Scene
+let renderer: THREE.WebGLRenderer
+let controls: THREE.OrbitControls
 
-const createParticles = (): Points => {
-  const geometry = new Geometry()
-  const material = new PointsMaterial({ size: 3, color: colors.green })
-  const particles = new Points(geometry, material)
+const createParticles = (): THREE.Points => {
+  const geometry = new THREE.Geometry()
+  const material = new THREE.PointsMaterial({ size: 1, color: colors.green })
+  const particles = new THREE.Points(geometry, material)
 
-  let x = 0.05
+  let x = 0.01
   let y = 0
   let z = 0
   let a = 10
@@ -40,7 +31,7 @@ const createParticles = (): Points => {
   let c = 8 / 3
 
   for (let i = 0; i < 1000; i++) {
-    const vertex = new Vector3()
+    const vertex = new THREE.Vector3()
 
     const dt = 0.01
     const dx = a * (y - x) * dt
@@ -60,20 +51,22 @@ const createParticles = (): Points => {
 }
 
 const main = () => {
-  camera = new PerspectiveCamera(75, width / height, 1, 1000)
-  camera.position.z = 1000
+  camera = new THREE.PerspectiveCamera(75, width / height, 1, 1000)
+  controls = new THREE.OrbitControls(camera)
+  camera.position.z = 200
+  controls.update()
 
-  scene = new Scene()
-  scene.fog = new FogExp2(0x000000, 0.0007)
+  scene = new THREE.Scene()
+  scene.fog = new THREE.FogExp2(0x000000, 0.0007)
   scene.add(camera)
 
-  renderer = new WebGLRenderer()
+  renderer = new THREE.WebGLRenderer()
   renderer.setSize(width, height)
   renderer.setPixelRatio(window.devicePixelRatio)
 
   container.appendChild(renderer.domElement)
 
-  const pointLight = new PointLight(0xffffff)
+  const pointLight = new THREE.PointLight(0xffffff)
   pointLight.position.x = 10
   pointLight.position.y = 50
   pointLight.position.z = 130
@@ -81,11 +74,13 @@ const main = () => {
 
   const particles = createParticles()
   scene.add(particles)
+
   render()
 }
 
 const render = () => {
   renderer.render(scene, camera)
+  controls.update()
   requestAnimationFrame(render)
 }
 
