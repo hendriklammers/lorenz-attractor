@@ -12,6 +12,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /three\/examples\/js/,
+        use: 'imports-loader?THREE=three',
+      },
+      {
         test: /\.tsx?$/,
         use: 'ts-loader',
       },
@@ -23,6 +27,12 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      'three-examples': path.join(
+        __dirname,
+        './node_modules/three/examples/js'
+      ),
+    },
   },
   devServer: {
     contentBase: __dirname + '/public',

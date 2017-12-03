@@ -1,6 +1,6 @@
 import './styles.css'
 import * as THREE from 'three'
-import 'imports-loader?THREE=three!exports-loader?THREE.OrbitControls!../node_modules/three/examples/js/controls/OrbitControls'
+import 'three-examples/controls/OrbitControls'
 
 const colors = {
   green: 0xd2fb78,
