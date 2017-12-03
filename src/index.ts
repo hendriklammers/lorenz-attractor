@@ -12,6 +12,7 @@ const colors = {
 const container = document.querySelector('#container')
 const width = window.innerWidth
 const height = window.innerHeight
+const particleData = []
 
 let camera: THREE.PerspectiveCamera
 let scene: THREE.Scene
@@ -33,11 +34,11 @@ const createParticles = (): THREE.Points => {
   let a = 10
   let b = 28
   let c = 8 / 3
+  const dt = 0.005
 
   for (let i = 0; i < 10000; i++) {
     const vertex = new THREE.Vector3()
 
-    const dt = 0.005
     const dx = a * (y - x) * dt
     const dy = (x * (b - z) - y) * dt
     const dz = (x * y - c * z) * dt
@@ -52,6 +53,14 @@ const createParticles = (): THREE.Points => {
   }
 
   return particles
+}
+
+const handleWindowResize = () => {
+  const width = window.innerWidth
+  const height = window.innerHeight
+  camera.aspect = width / height
+  camera.updateProjectionMatrix()
+  renderer.setSize(width, height)
 }
 
 const main = () => {
@@ -74,6 +83,8 @@ const main = () => {
   scene.add(particles)
 
   render()
+
+  window.addEventListener('resize', handleWindowResize)
 }
 
 const render = () => {
