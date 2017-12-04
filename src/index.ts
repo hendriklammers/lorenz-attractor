@@ -21,20 +21,20 @@ let controls: THREE.OrbitControls
 
 const createParticles = (): THREE.Points => {
   const geometry = new THREE.Geometry()
-  const material = new THREE.PointsMaterial({
-    size: 1,
-    color: colors.green,
-    sizeAttenuation: false,
+  const material = new THREE.LineBasicMaterial({
+    color: colors.cyan,
+    linewidth: 3,
   })
-  const particles = new THREE.Points(geometry, material)
+  const particles = new THREE.Line(geometry, material)
 
   let x = 0.01
   let y = 0
   let z = 0
   let a = 10
   let b = 28
-  let c = 8 / 3
+  let c = 2.5
   const dt = 0.005
+  const scale = 1.5
 
   for (let i = 0; i < 10000; i++) {
     const vertex = new THREE.Vector3()
@@ -46,9 +46,9 @@ const createParticles = (): THREE.Points => {
     y = y + dy
     z = z + dz
 
-    vertex.x = x
-    vertex.y = y
-    vertex.z = z
+    vertex.x = x * scale
+    vertex.y = y * scale
+    vertex.z = z * scale
     geometry.vertices.push(vertex)
   }
 
@@ -76,15 +76,14 @@ const main = () => {
   renderer = new THREE.WebGLRenderer()
   renderer.setSize(width, height)
   renderer.setPixelRatio(window.devicePixelRatio)
-
   container.appendChild(renderer.domElement)
 
   const particles = createParticles()
   scene.add(particles)
 
-  render()
-
   window.addEventListener('resize', handleWindowResize)
+
+  render()
 }
 
 const render = () => {
