@@ -3,7 +3,7 @@ const path = require('path')
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   devtool: 'source-map',
-  entry: [path.resolve(__dirname, 'src/index.ts')],
+  entry: [path.resolve(__dirname, 'src/index.js')],
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/dist',
@@ -12,12 +12,27 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /three\/examples\/js/,
-        use: 'imports-loader?THREE=three',
-      },
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
+        test: /\.js$/,
+        include: [path.resolve(__dirname, 'src')],
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                [
+                  '@babel/preset-env',
+                  {
+                    targets: {
+                      browsers: ['last 2 versions'],
+                    },
+                    useBuiltIns: 'usage',
+                  },
+                ],
+                '@babel/stage-0',
+              ],
+            },
+          },
+        ],
       },
       {
         test: /\.css$/,
@@ -25,8 +40,10 @@ module.exports = {
       },
     ],
   },
+  performance: {
+    hints: false,
+  },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
     alias: {
       'three-examples': path.join(
         __dirname,

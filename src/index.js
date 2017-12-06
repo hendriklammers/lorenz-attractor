@@ -12,17 +12,19 @@ const colors = {
 const container = document.querySelector('#container')
 const width = window.innerWidth
 const height = window.innerHeight
-const particleData = []
+const settings = {
+  color: colors.cyan,
+}
 
-let camera: THREE.PerspectiveCamera
-let scene: THREE.Scene
-let renderer: THREE.WebGLRenderer
-let controls: THREE.OrbitControls
+let camera
+let scene
+let renderer
+let controls
 
-const createParticles = (): THREE.Points => {
+const createParticles = () => {
   const geometry = new THREE.Geometry()
   const material = new THREE.LineBasicMaterial({
-    color: colors.cyan,
+    color: settings.color,
     linewidth: 3,
   })
   const particles = new THREE.Line(geometry, material)
