@@ -1,6 +1,6 @@
 import './styles.css'
 import * as THREE from 'three'
-import 'three-examples/controls/OrbitControls'
+import OrbitControls from 'orbit-controls-es6'
 
 const colors = {
   green: 0xd2fb78,
@@ -67,7 +67,7 @@ const handleWindowResize = () => {
 
 const main = () => {
   camera = new THREE.PerspectiveCamera(75, width / height, 1, 1000)
-  controls = new THREE.OrbitControls(camera)
+  controls = new OrbitControls(camera)
   camera.position.z = 100
   controls.update()
 
