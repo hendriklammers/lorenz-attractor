@@ -2073,6 +2073,15 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
+"dat.gui@https://github.com/dataarts/dat.gui#v0.6.5":
+  version "0.6.5"
+  resolved "https://github.com/dataarts/dat.gui#2659494a8064562555fc0c1fad6a311cc88213c4"
+  dependencies:
+    babel-preset-es2015 "^6.14.0"
+    babelify "^7.3.0"
+    sassify "^2.0.0"
+    stringify "^5.1.0"
+
 "dat.gui@https://github.com/dataarts/dat.gui/archive/v0.6.5.tar.gz":
   version "0.6.5"
   resolved "https://github.com/dataarts/dat.gui/archive/v0.6.5.tar.gz#6a1edc7a9e720ff829f51246699b66ced4859a68"
