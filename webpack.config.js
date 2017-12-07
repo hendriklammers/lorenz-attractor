@@ -40,9 +40,6 @@ module.exports = {
       },
     ],
   },
-  performance: {
-    hints: false,
-  },
   resolve: {
     alias: {
       'three-examples': path.join(
