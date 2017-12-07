@@ -1,13 +1,17 @@
 const path = require('path')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   devtool: 'source-map',
-  entry: [path.resolve(__dirname, 'src/index.js')],
+  entry: {
+    bundle: path.resolve(__dirname, 'src/index.js'),
+    'bundle.min': path.resolve(__dirname, 'src/index.js'),
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/dist',
-    filename: 'bundle.js',
+    filename: '[name].js',
   },
   module: {
     rules: [
@@ -25,6 +29,7 @@ module.exports = {
                     targets: {
                       browsers: ['last 2 versions'],
                     },
+                    forceAllTransforms: true,
                     useBuiltIns: 'usage',
                   },
                 ],
@@ -40,6 +45,15 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new UglifyJsPlugin({
+      test: /\.min\.js$/,
+      sourceMap: true,
+      uglifyOptions: {
+        compress: true,
+      },
+    }),
+  ],
   devServer: {
     contentBase: __dirname + '/public',
     inline: true,
