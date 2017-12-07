@@ -25,20 +25,14 @@ let camera
 let scene
 let renderer
 let controls
-let material
+let lorenz
 
-const createPoints = () => {
-  const geometry = new THREE.Geometry()
-  material = new THREE.LineBasicMaterial({
-    color: settings.color,
-    linewidth: 3,
-  })
-  const particles = new THREE.Line(geometry, material)
-
+function createVertices() {
   let x = 0.01
   let y = 0
   let z = 0
   const dt = 0.005
+  const vertices = []
 
   for (let i = 0; i < 10000; i++) {
     const vertex = new THREE.Vector3()
@@ -53,13 +47,12 @@ const createPoints = () => {
     vertex.x = x * settings.scale
     vertex.y = y * settings.scale
     vertex.z = z * settings.scale
-    geometry.vertices.push(vertex)
+    vertices.push(vertex)
   }
-
-  return particles
+  return vertices
 }
 
-const handleWindowResize = () => {
+function handleWindowResize() {
   const width = window.innerWidth
   const height = window.innerHeight
   camera.aspect = width / height
@@ -67,7 +60,7 @@ const handleWindowResize = () => {
   renderer.setSize(width, height)
 }
 
-const main = () => {
+function main() {
   camera = new THREE.PerspectiveCamera(75, width / height, 1, 1000)
   camera.position.z = 100
 
@@ -83,8 +76,13 @@ const main = () => {
   controls = new OrbitControls(camera, renderer.domElement)
   controls.update()
 
-  const particles = createPoints()
-  scene.add(particles)
+  const geometry = new THREE.Geometry()
+  const material = new THREE.LineBasicMaterial({
+    color: settings.color,
+    linewidth: 3,
+  })
+  lorenz = new THREE.Line(geometry, material)
+  scene.add(lorenz)
 
   window.addEventListener('resize', handleWindowResize)
 
@@ -98,8 +96,11 @@ const main = () => {
   gui.addColor(settings, 'color')
 }
 
-const render = () => {
-  material.color.setHex(settings.color)
+function render() {
+  lorenz.geometry.vertices = createVertices()
+  lorenz.geometry.verticesNeedUpdate = true
+  lorenz.material.color.setHex(settings.color)
+
   renderer.render(scene, camera)
   controls.update()
   requestAnimationFrame(render)
