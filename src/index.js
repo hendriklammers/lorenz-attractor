@@ -3,13 +3,6 @@ import * as THREE from 'three'
 import OrbitControls from 'orbit-controls-es6'
 import { GUI } from 'dat.gui/build/dat.gui.js'
 
-// const colors = {
-//   green: 0xd2fb78,
-//   purple: 0xc13bfe,
-//   blue: 0x5821d4,
-//   cyan: 0x49cdf6,
-//   grey: 0x49496a,
-// }
 const container = document.querySelector('#container')
 const width = window.innerWidth
 const height = window.innerHeight
