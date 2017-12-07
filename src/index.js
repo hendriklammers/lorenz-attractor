@@ -13,6 +13,7 @@ const settings = {
 const container = document.querySelector('#container')
 const width = window.innerWidth
 const height = window.innerHeight
+let lastSettings = { ...settings }
 let camera
 let scene
 let renderer
@@ -43,6 +44,7 @@ function initScene() {
   controls.update()
 
   const geometry = new THREE.Geometry()
+  geometry.vertices = createVertices()
   const material = new THREE.LineBasicMaterial({
     color: settings.color,
     linewidth: 3,
@@ -81,10 +83,13 @@ function createVertices() {
 }
 
 function render() {
-  // TODO: Only call createVertices when settings are updated
-  lorenz.geometry.vertices = createVertices()
-  lorenz.geometry.verticesNeedUpdate = true
-  lorenz.material.color.setHex(settings.color)
+  // Only update vertices when settings have changed
+  if (JSON.stringify(lastSettings) !== JSON.stringify(settings)) {
+    lorenz.geometry.vertices = createVertices()
+    lorenz.geometry.verticesNeedUpdate = true
+    lorenz.material.color.setHex(settings.color)
+    lastSettings = { ...settings }
+  }
 
   renderer.render(scene, camera)
   controls.update()
