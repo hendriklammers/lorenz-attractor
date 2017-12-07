@@ -82,9 +82,9 @@ function main() {
   render()
 
   const gui = new GUI()
-  gui.add(settings, 'sigma')
-  gui.add(settings, 'rho')
-  gui.add(settings, 'beta')
+  gui.add(settings, 'sigma', 1, 20)
+  gui.add(settings, 'rho', 10, 50)
+  gui.add(settings, 'beta', 1, 5)
   gui.add(settings, 'scale', 1, 2)
   gui.addColor(settings, 'color')
 }
