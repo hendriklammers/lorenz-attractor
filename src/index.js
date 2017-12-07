@@ -32,7 +32,6 @@ function initScene() {
   camera.position.z = 100
 
   scene = new THREE.Scene()
-  scene.fog = new THREE.FogExp2(0x000000, 0.0007)
   scene.add(camera)
 
   renderer = new THREE.WebGLRenderer()
@@ -57,7 +56,7 @@ function initGui() {
   gui.add(settings, 'sigma', 1, 20)
   gui.add(settings, 'rho', 10, 50)
   gui.add(settings, 'beta', 1, 5)
-  gui.add(settings, 'scale', 1, 2)
+  gui.add(settings, 'scale', 0.5, 3)
   gui.addColor(settings, 'color')
 }
 
