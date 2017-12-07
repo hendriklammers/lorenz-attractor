@@ -40,14 +40,6 @@ module.exports = {
       },
     ],
   },
-  resolve: {
-    alias: {
-      'three-examples': path.join(
-        __dirname,
-        './node_modules/three/examples/js'
-      ),
-    },
-  },
   devServer: {
     contentBase: __dirname + '/public',
     inline: true,
