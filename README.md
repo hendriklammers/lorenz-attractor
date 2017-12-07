@@ -1,2 +1,2 @@
 # lorenz-attractor
-Lorenz attractor with Threejs
+Lorenz attractor visualised with three.js

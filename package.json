@@ -1,7 +1,7 @@
 {
   "name": "lorenz-attractor",
   "version": "0.1.0",
-  "description": "Lorenz attractor with Threejs",
+  "description": "Lorenz attractor visualised with three.js",
   "main": "src/index.js",
   "scripts": {
     "build": "yarn && npm run lint && webpack",
