@@ -43,13 +43,14 @@ function initScene() {
   controls = new OrbitControls(camera, renderer.domElement)
   controls.update()
 
-  const geometry = new THREE.Geometry()
-  geometry.vertices = createVertices()
-  const material = new THREE.LineBasicMaterial({
-    color: settings.color,
-    linewidth: 3,
-  })
-  lorenz = new THREE.Line(geometry, material)
+  lorenz = new THREE.Line(
+    new THREE.Geometry(),
+    new THREE.LineBasicMaterial({
+      color: settings.color,
+      linewidth: 3,
+    })
+  )
+  lorenz.geometry.vertices = createVertices()
   scene.add(lorenz)
 }
 
