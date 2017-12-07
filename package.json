@@ -27,7 +27,7 @@
     "webpack-dev-server": "^2.9.5"
   },
   "dependencies": {
-    "dat.gui": "^0.6.1",
+    "dat.gui": "https://github.com/dataarts/dat.gui/archive/v0.6.5.tar.gz",
     "orbit-controls-es6": "^1.0.10",
     "three": "^0.88.0"
   }
